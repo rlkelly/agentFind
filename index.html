@@ -1,0 +1,196 @@
+  <head>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Neuton:800' rel='stylesheet' type='text/css'>
+
+  </head>
+
+<div style="background-image:url('http://hdwyn.com/wallpaper_gray/gray_background_leaf_light_bright_colors_hd-wallpaper-17933.jpg'); min-height:350%; min-width=250%; background-size:cover;">
+<div class="container" ng-app="sortApp">
+<div ng-controller="mainController">
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"> {{tab}}</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#" ng-click="setTab(1)">Search</a></li>
+            <li>
+              <a href="#" ng-click="setTab(2)">Results</a></li>
+            <li>
+          </ul>
+        </div>
+    </nav>
+
+  <div ng-show="isSet(1)" class="wrapper">
+  </br></br></br></br></br></br></br></br></br></br>
+  <center>
+            <form ng-submit="submit()">
+              Enter address:
+              <input type="text" ng-model="text" name="text" />
+              Enter DB:
+              <input type="text" ng-model="text2" name="text" />
+
+              <input type="submit" id="submit" value="Submit" />
+              <pre>list={{search}}</pre>
+            </form>
+  {{temp}}
+</center>
+ </div>
+
+<div ng-show="isSet(2)" class="wrapper" style="position: absolute;top:80px;">
+  
+  <div class="alert alert-info">
+    <p>Sort Type: {{ sortType }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p>    
+  </div>
+
+  Bedrooms:
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search" ng-model="searchWord">
+      </div>      
+    </div>
+  </form>
+
+Bathrooms:
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search" ng-model="searchWord2">
+      </div>      
+    </div>
+  </form>
+
+Square Footage:
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search" ng-model="searchWord3">
+      </div>      
+    </div>
+  </form>
+
+  
+  <table class="table table-bordered table-striped">
+    
+    <thead>
+      <tr>
+         <td>
+          <a href="#" ng-click="sortType = 'agent'; sortReverse = !sortReverse">
+            agentId 
+            <span ng-show="sortType == 'agent' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'agent' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+
+
+        <td>
+          <a href="#" ng-click="sortType = 'bedrooms'; sortReverse = !sortReverse">
+          Bedrooms 
+            <span ng-show="sortType == 'bedrooms' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'bedrooms' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+
+        <td>
+          <a href="#" ng-click="sortType = 'baths'; sortReverse = !sortReverse">
+          Baths 
+            <span ng-show="sortType == 'baths' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'baths' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+
+        <td>
+          <a href="#" ng-click="sortType = 'squareFootage'; sortReverse = !sortReverse">
+          Sq. Ft. 
+            <span ng-show="sortType == 'squareFootage' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'squareFootage' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+
+        <td>
+          <a href="#" ng-click="sortType = 'percent_over_orig'; sortReverse = !sortReverse">
+          Percent Over Original
+            <span ng-show="sortType == 'percent_over_orig' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'percent_over_orig' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+
+          <td>
+          <a href="#" ng-click="sortType = 'daysOnMarket'; sortReverse = !sortReverse">
+          daysOnMarket
+            <span ng-show="sortType == 'daysOnMarket' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'daysOnMarket' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+    
+   
+  <tbody>
+    <tr ng-repeat="x in test | orderBy:sortType:sortReverse |  filter: nearBy('bedrooms', searchWord) | filter: nearBy('baths', searchWord2) | filter: nearBy('squareFootage', searchWord3)">
+      <td><a href="http://ec2-54-152-248-65.compute-1.amazonaws.com/hello/{{x.agent}}">
+
+        <a href = "" ng-click="setTab(3); createH1(x.agent);">
+
+        {{x.agent}}</a></td>
+
+       <td>{{x.bedrooms}}</td>
+       <td>{{x.baths}}</td>
+        <td>{{x.squareFootage}}</td>
+        <td>{{x.percent_over_orig}}</td>
+        <td>{{x.daysOnMarket}}</td>
+
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<div ng-show="isSet(3)"  style="position: absolute;top:80px;">
+  <div class="container-fluid">
+  <div class="row-fluid">
+<div class="col-md-6">
+     {{html.fullName}}
+</br>
+<img src="{{html.media[0].url}}">
+</br>
+cellPhone: {{html.cellPhone}}
+</br>
+home:{{html.homePhone}}
+</br>
+office:{{html.officePhone}}
+</br>
+Office:{{html.officeName}}
+</br>
+Title: {{html.title}}
+</br>
+description: {{html.media[0].shortDescription}}
+</br>
+</br>
+id:{{html.id}}
+</div>
+
+<div>
+</br></br></br></br></br></br>
+<center>
+<h1> RECENT MLS LISTINGS </h1>
+<div class="col-md-6" ng-repeat="listing in html2">
+  <a href={{"http://www.zillow.com/homes/"+listing.value}}>
+{{listing.value}}</a>
+</div>
+</center>
+</div>
+</div>
+</div>
+</body>
+</html>

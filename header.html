@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="realEstate">
+  <head>
+
+    <title>Sell Your House</title>
+
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Neuton:800' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Neuton:800' rel='stylesheet' type='text/css'>
+
+  </head>
+
+  </head>
+
+  <body ng-controller="TabController as tab">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">House Seller</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="{[{tab.isSet(1)}]}">
+              <a href="#" ng-click="tab.setTab(1)">Home</a></li>
+            <li class="{[{tab.isSet(2)}]}">
+              <a href="#" ng-click="tab.setTab(2)">Sell</a></li>
+            <li class="{[{tab.isSet(3)}]}">
+              <a href="#" ng-click="tab.setTab(3)">Buy</a></li>
+            <li class="{[{tab.isSet(4)}]}">
+              <a href="#" ng-click="tab.setTab(4)">OpenHouse</a></li>
+            <li class="{[{tab.isSet(5)}]}">
+              <a href="#" ng-click="tab.setTab(5)">About</a></li>
+          </ul>
+        </div>
+    </nav>
+
+          <div ng-show="tab.isSet(1)" class="wrapper">
+
+              <a href="" ng-click="tab.setTab(2)">
+                <div class="col three">
+                  <div class="centered">
+                    <h1>Sell a House!</h1>
+                  </div>
+                </div>
+              </a>
+
+              <a href="" ng-click="tab.setTab(3)">
+                <div class="col two">
+                  <div class="centered">
+                    <h1>Buy a House!</h1>
+                  </div>
+                </div>
+              </a>
+                
+              <a href="" ng-click="tab.setTab(4)" >
+                <div class="col one">
+                  <div class="centered">
+                    <h1>Open Houses!</h1>
+                  </div>
+                </div>
+              </a>
+          </div>
+
+          <div ng-show="tab.isSet(2)" class="wrapper">
+
+            <img src="static/images/gone.jpg" class="background">
+              <div class="search">
+
+              <h5>Search for an agent</h5>
+
+              <form action="" method="post">
+                <fieldset class="form-group">
+                <select ng-model="searchCtrl.agent" class="form-control" ng-options="neigh for neigh in ['tenderloin', 'SOMA']" title="Neighborhoods" name="neigh">
+                  <option value>Neighborhood</option>
+                </select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <select ng-model="searchCtrl.beds" class="form-control" ng-options="bed for bed in ['5+','4+','3+','2+','1+', 'studio']" title="Beds" name="beds">
+                  <option value>Bedrooms</option>
+                </select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input type="submit" class="btn btn-primary pull-right" value="Search" />
+              </fieldset>
+            </form>
+            </div>
+
+          </div>
+          
+          <div ng-show="tab.isSet(3)" class="wrapper">
+            <img src="static/images/buy.jpg" class="background">
+              <div class="search">
+
+              <h5>Search for new home!</h5>
+              <fieldset class="form-group">
+                <select ng-model="searchCtrl.place.going" class="form-control" ng-options="stars for stars in ['tenderloin', 'SOMA']" title="Stars">
+                  <option value>Neighborhood</option>
+                </select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <select ng-model="searchCtrl.review.stars" class="form-control" ng-options="stars for stars in ['5+','4+','3+','2+','1+', 'studio']" title="Stars">
+                  <option value>Bedrooms</option>
+                </select>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input type="submit" class="btn btn-primary pull-right" value="Search" />
+              </fieldset>
+            </div>
+
+          </div>
+
+          <div ng-show="tab.isSet(4)" class="wrapper">
+            <img src="http://www.labarberaenterprises.com/deco/gray-background.jpg" class="background">
+
+            <h5>OPENHOUSE</h5>
+            <blockquote>LOREM IPSUM</blockquote>
+
+          
+          </div>
+
+          <!--  Review Tab's Content  -->
+          <div ng-show="tab.isSet(5)" class="wrapper" style="background-image:url('http://www.wallpaperup.com/uploads/wallpapers/2013/12/04/184494/big_thumb_deef8bac8f3e29c04e8da264f11f8ca6.jpg'); min-height:100%; background-size:cover;">
+
+             <div class="search">
+               <h5>Ajay and Rob</h5>
+               <center>
+                  <cite class="clearfix">TeamWork</cite>
+                </center>
+              </div>
+        </div> 
+
+    </body>
+  </html>
